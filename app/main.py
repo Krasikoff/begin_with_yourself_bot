@@ -111,7 +111,7 @@ app.add_middleware(DBSessionMiddleware, db_url=settings.database_url)
 async def bot_webhook(update: dict) -> None:
     """Назначаем путь для обработки POST-запросов от телеграмма."""
     telegram_update = types.Update(**update)
-    await dp.feed_webhook_update(bot=bot, update=telegram_update)
+    await dp.feed_update(bot=bot, update=telegram_update)
 
 
 authentication_backend = AdminAuth(secret_key=settings.admin_auth_secret)

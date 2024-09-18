@@ -84,7 +84,7 @@ uvicorn app.main:app --reload
 * Не забываем в файле .env 
 
 ```text
-TELEGRAM_BOT_TOKEN=69000027:AAHUdelfhmd-7Ejfhgdhf4rikMBKf7mWqI
+TELEGRAM_BOT_TOKEN = '1234567890:Ваш_телеграм_токен'
 WEBHOOK_HOST = 'https://внешний_адрес_forwarding.ngrok-free.app'
 ```
 

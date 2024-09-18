@@ -44,7 +44,6 @@ logger = get_logger(__name__)
 
 WEBHOOK_PATH = f'/bot/{settings.telegram_bot_token}'
 WEBHOOK_URL = f'{settings.webhook_host}{WEBHOOK_PATH}'
-WEBHOOK_MODE = settings.webhook_mode
 
 bot = Bot(token=settings.telegram_bot_token, parse_mode='HTML')
 dp = Dispatcher()

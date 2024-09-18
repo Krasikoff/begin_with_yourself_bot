@@ -44,7 +44,7 @@ async def training_callback(
         menu_name=WORKOUTS,
         user=await user_crud.get_by_attribute(
             'telegram_id',
-            str(callback_query.from_user.id),
+            callback_query.from_user.id,
             session,
         ),
         session=session,
@@ -63,16 +63,7 @@ async def sleep_callback(
     session: AsyncSession,
 ) -> None:
     """Отправляет картинку и меню при нажатии контроль сна."""
-    media, reply_markup = await sleep_mode_menu(
-        level=1,
-        menu_name=SLEEP,
-        user=await user_crud.get_by_attribute(
-            'telegram_id',
-            callback_query.from_user.id,
-            session,
-        ),
-    )
-
+    media, reply_markup = await sleep_mode_menu(level=1, menu_name=SLEEP)
     if type(callback_query.message) is Message:
         await callback_query.message.answer_photo(
             photo=media.media,
@@ -92,7 +83,7 @@ async def calories_callback(
         menu_name=DIET,
         user=await user_crud.get_by_attribute(
             'telegram_id',
-            str(callback_query.from_user.id),
+            callback_query.from_user.id,
             session,
         ),
         session=session,
@@ -161,6 +152,7 @@ async def time_to_calorie_hourly() -> None:
                 chat_id=tg_id,
                 text=TEXT_FOR_DIET_SIMPLE,
                 reply_markup=get_remind_button(DIET),
+
             )
         except Exception:
             logger.info('пользователь заблокировал бота')

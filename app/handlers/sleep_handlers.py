@@ -59,11 +59,14 @@ async def go_to_bed_menu(
         session=session,
         user=user,
     )
-    sleep_status = await get_sleep_status(
-        current_sleep_obj,
-        int(utc_offset_hours),
-        SleepMode.GO_TO_BED,
-    )
+    if current_sleep_obj is not None:
+        sleep_status = await get_sleep_status(
+            current_sleep_obj,
+            int(utc_offset_hours),
+            SleepMode.GO_TO_BED,
+        )
+    else:
+        sleep_status = SleepMode.VALID
     match sleep_status:
         case SleepMode.SLEEP_EXIST:
             menu_name = SleepMode.SLEEP_EXIST
@@ -100,11 +103,14 @@ async def wake_up_menu(
         session,
         user,
     )
-    sleep_status = await get_sleep_status(
-        current_sleep_obj,
-        int(utc_offset_hours),
-        SleepMode.WAKE_UP,
-    )
+    if current_sleep_obj is not None:
+        sleep_status = await get_sleep_status(
+            current_sleep_obj,
+            int(utc_offset_hours),
+            SleepMode.WAKE_UP,
+        )
+    else:
+        sleep_status = SleepMode.FORGOT_SET_WKUP_TIME
     match sleep_status:
         case SleepMode.SLEEP_EXIST:
             menu_name = SleepMode.SLEEP_EXIST
@@ -242,11 +248,14 @@ async def duration_callback(
     )
     yesterday_date = await get_yesterday(utc_offset_hours)
     sleep = await sleep_crud.get_last_sleep_obj(session, user)
-    sleep_status = await get_sleep_status(
-        sleep,
-        utc_offset_hours,
-        SleepMode.DURATION,
-    )
+    if sleep is not None:
+        sleep_status = await get_sleep_status(
+            sleep,
+            utc_offset_hours,
+            SleepMode.DURATION,
+        )
+    else:
+        sleep_status = SleepMode.VALID
     match sleep_status:
         case SleepMode.SLEEP_EXIST:
             media, reply_markup = (

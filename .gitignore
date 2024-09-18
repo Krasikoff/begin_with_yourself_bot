@@ -151,4 +151,4 @@ media/
 upload/
 
 # database
-*.db
+#*.db

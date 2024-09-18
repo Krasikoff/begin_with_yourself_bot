@@ -53,7 +53,7 @@ async def user_menu(
     """Обработка нажатия кнопок меню."""
     user = await user_crud.get_by_attribute(
         'telegram_id',
-        str(callback.from_user.id),
+        callback.from_user.id,
         session,
     )
     media, reply_markup = await get_menu_content(

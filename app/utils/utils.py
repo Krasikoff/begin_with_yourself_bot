@@ -138,7 +138,7 @@ async def get_reminder_state(user: User, session: AsyncSession) -> str:
     """
     schedule = await schedule_crud.get_by_attribute(
         'user_id',
-        str(user.id),
+        user.id,
         session,
     )
     if getattr(schedule, 'stop_reminder_train'):

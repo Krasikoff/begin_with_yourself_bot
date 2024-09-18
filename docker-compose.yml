@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  bwy_bot_cont:
+    restart: always
+    image: krasikoff/bwy_bot
+    env_file: .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - data_volume:/code/data
+volumes:
+  data_volume:
+  
